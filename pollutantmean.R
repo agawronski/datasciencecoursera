@@ -1,10 +1,10 @@
 rm(list=ls())
 getwd()
-setwd("C:/Users/NC/data_science/datasciencecoursera")
+setwd("C:/Users/NC/data_science")
 
 pollutantmean<-function(directory, pollutant, id=1:332) { 
-  all_files<-list.files("specdata", full.names=TRUE)
-  data<-data.frame()
+  all_files<-list.files("specdata", full.names=TRUE) #character vec of filenames
+  data<-data.frame() #empty frame
   for (i in id){
       data<-rbind(data, read.csv(all_files[i]))
   }
