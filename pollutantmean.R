@@ -1,6 +1,3 @@
-rm(list=ls())
-getwd()
-setwd("C:/Users/NC/data_science")
 
 pollutantmean<-function(directory, pollutant, id=1:332) { 
   all_files<-list.files("specdata", full.names=TRUE) #character vec of filenames
