@@ -1,3 +1,6 @@
+rm(list=ls())
+getwd()
+setwd("C:/Users/NC/data_science")
 
 complete <- function(directory, id = 1:332){
   files<-list.files("specdata", full.names=TRUE)
@@ -7,8 +10,11 @@ complete <- function(directory, id = 1:332){
   }
   final_table<-data.frame() #empty
   for (i in id){
-    final_table<-rbind(final_table, c(i,sum(complete.cases(all_data[all_data$ID==i,]))))
+    final_table<-rbind(c(i,sum(complete.cases(all_data[all_data$ID==i,]))))
   }
   colnames(final_table)<-c("id","nobs")
   print(final_table)
+  class(final_table)
 }
+  
+
