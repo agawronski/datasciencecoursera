@@ -2,7 +2,7 @@
 
 ## write a function called "rankhospital"
  
-## state (eg. "NY"), outcome (eg. "pnemonia"), num (eg. "2")
+## state (eg. "NY"), outcome (eg. "pneumonia"), num (eg. "2")
 ## rankhospital reads "outcome-of-care-measures.csv"...
 ## returns a character vector with the hospital specified by num
 ## with the lowest 30 day mort for the specified outcome
@@ -26,8 +26,8 @@ rankhospital <- function(state, outcome, num="best"){
   
   #best and worst
   if (num == "best") {num <- 1}
-  if (num == "worst") {num <- length(data[states==state,2])}
-  if (num > length(data[states==state,2])) {num <- return(NA)}
+  if (num == "worst") {num <- length(data[states==state & data[,outcome]!="NA",])}
+  if (num > length(data[states==state & data[,outcome]!="NA",])) {num <- return(NA)}
   
   #order by alphabet
   data <- data[order(data[,1]),]
