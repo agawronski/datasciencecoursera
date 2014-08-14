@@ -1,11 +1,11 @@
-outcome<-read.csv("outcome-of-care-measures.csv",colClasses="character")
-head(outcome)
-colnames(outcome)
-dim(outcome)
-outcome[,11]<-as.numeric(outcome[,11])
-hist(outcome[,11])
-outcome$Hospital.Name # names of the hospitals
-outcome$State # abbreviated states
+##outcome<-read.csv("outcome-of-care-measures.csv",colClasses="character")
+##head(outcome)
+##colnames(outcome)
+##dim(outcome)
+##outcome[,11]<-as.numeric(outcome[,11])
+##hist(outcome[,11])
+##outcome$Hospital.Name # names of the hospitals
+##outcome$State # abbreviated states
 
 best<-function(state,outcome) {
   all_data<-read.csv("outcome-of-care-measures.csv",colClasses="character")
@@ -18,31 +18,18 @@ best<-function(state,outcome) {
     else stop("invalid outcome")
   }
   else stop("invalid state")
+  state_data[,c(2,3,4)]<-sapply(state_data[,c(2,3,4)], as.numeric)
+  state_data<-state_data[order(state_data[,1]),] # alphabetize
   if (outcome=="heart attack") {
     final_set<-state_data[,c("h_name","heart attack")]
-    vec<-as.numeric(final_set[,2])
-    min<-min(vec,na.rm=TRUE)
-    print(min)
-    besth<-final_set[final_set[,2]==min,1]
-    print(besth)
   }
   else if (outcome=="heart failure") {
     final_set<-state_data[,c("h_name","heart failure")]
-    vec<-as.numeric(final_set[,2])
-    min<-min(vec,na.rm=TRUE)
-    print(min)
-    class(min)
-    besth<-final_set[final_set[,2]==min,1]
-    print(besth)
   }
-  else if (outcome=="pneumonia") {
+  else {
     final_set<-state_data[,c("h_name","pneumonia")]
-    vec<-as.numeric(final_set[,2])
-    min<-min(vec,na.rm=TRUE)
-    print(min)
-    class(min)
-    besth<-final_set[final_set[,2]==min,1]
-    print(besth)
   }
+  besth<-final_set[which.min(final_set[,2]),1]
+  print(besth)
 }
 
