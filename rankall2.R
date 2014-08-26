@@ -21,20 +21,26 @@ rankall <- function (outcome, num = "best") {
   
   if(num=="best") {
     best <- lapply(state_list, function(x) x[order(x[,"d"]),]) #ordering ascending
-    final_list <- lapply(best, "[", 1,c(1,2),drop=TRUE) #make a df with the first entry on each list
+    final_list <- lapply(best, "[", 1, 1, drop=TRUE) #make a df with the first entry on each list
+    final_states   <- lapply(best, "[", 1, 2, drop=TRUE)
   }
   else if(num=="worst") {
     worst <- lapply(state_list, function(x) x[order(x[,"d"],decreasing=TRUE),]) #order descending
-    final_list <- lapply(worst, "[", 1,c(1,2),drop=TRUE) #make a df with the first entry on each list
+    final_list <- lapply(worst, "[", 1,1,drop=TRUE) #make a df with the first entry on each list
+    final_states <- lapply(worst, "[", 1, 2, drop=TRUE)
   }
   else if(is.numeric(num)) {
     order <- lapply(state_list, function(x) x[order(x[,"d"]),]) #ordering ascending
-    final_list <- lapply(order, "[", num,c(1,2),drop=TRUE) #make a df with entry = num
+    final_list <- lapply(order, "[", num,1,drop=TRUE) #make a df with entry = num
+    final_states <- lapply(order, "[", 1, 2, drop=TRUE)
   }
   else {
     stop("invalid num")
   }
-  final_df <- as.data.frame(do.call("rbind", final_list))
+  hospital_vec <- as.data.frame(do.call("rbind", final_list))
+  state_vec <- as.data.frame(do.call("rbind", final_states))
+  final_df <- cbind(hospital_vec, state_vec)
+  names(final_df) <- c("hospital", "state")
   final_df
   
 }
