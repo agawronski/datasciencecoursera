@@ -24,6 +24,11 @@ rankhospital <- function(state, outcome, num="best"){
   if(!(state%in%states)){stop("invalid state")}
   if(!(outcome%in%outcomes)) {stop("invalid outcome")}
   
+  #best and worst
+  if (num == "best") {num <- 1}
+  if (num == "worst") {num <- length(data[states==state,2])}
+  if (num > length(data[states==state,2])) {num <- return(NA)}
+  
   #order by alphabet
   data <- data[order(data[,1]),]
   
