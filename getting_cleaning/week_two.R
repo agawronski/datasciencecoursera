@@ -30,3 +30,7 @@ close(con)
 
 answerdf <- html[c(10, 20, 30, 100)]
 answer <- sapply(answerdf, nchar, USE.NAMES=FALSE) # [1] 45 31  7 25
+
+#5 fixed width format read.fwf
+data <- read.fwf("./getting_cleaning/fixed_width.for", skip=4, widths=c(12, 7, 4, 9, 4, 9, 4, 9, 4))
+sum(data[,4])
