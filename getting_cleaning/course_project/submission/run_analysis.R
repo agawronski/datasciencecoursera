@@ -87,7 +87,9 @@ names(data_set) <- gsub("std", "Std", names(data_set))
 #average each variable for each activity and each subject
 grouped_set <- group_by(data_set, activity, SubjectId)
 final_set <- summarise_each(grouped_set, "mean")
-#take a look at the tidy data set
-View(final_set)
+
 #write the table into the working directory as final_set.txt
 write.table(final_set, file="final_set.txt", row.names=FALSE)
+
+#take a look at the tidy data set
+View(final_set)
