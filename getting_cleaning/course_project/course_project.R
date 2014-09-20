@@ -17,6 +17,12 @@ test_df <- cbind(test_df, subject_id)
 
 #merge test_df and the activity labels
 activity_labels <- read.table(file="./getting_cleaning/course_project/activity_labels.txt", header=FALSE)
+#remove the underscore and make all lower case
+activity_labels[,2] <- tolower(gsub("_", "", activity_labels[,2]))
+#capitalize the first letter of upstairs for readability 
+substr(activity_labels[2,2], 8,8) <- toupper(substr(activity_labels[2,2], 8,8))
+#capitalize the first letter of downstairs for readability 
+substr(activity_labels[3,2], 8,8) <- toupper(substr(activity_labels[3,2], 8,8))
 test_df <- merge(test_df, activity_labels, by.x="labels", by.y="V1", all=TRUE)
 colnames(test_df)[564] <- "activity" #rename new activty column
 
@@ -43,6 +49,13 @@ train_df <- cbind(train_df, subject_id)
 
 #merge train_df and the activity labels
 activity_labels <- read.table(file="./getting_cleaning/course_project/activity_labels.txt", header=FALSE)
+#remove the underscore and make all lower case
+activity_labels[,2] <- tolower(gsub("_", "", activity_labels[,2]))
+#capitalize the first letter of upstairs for readability 
+substr(activity_labels[2,2], 8,8) <- toupper(substr(activity_labels[2,2], 8,8))
+#capitalize the first letter of downstairs for readability 
+substr(activity_labels[3,2], 8,8) <- toupper(substr(activity_labels[3,2], 8,8))
+
 train_df <- merge(train_df, activity_labels, by.x="labels", by.y="V1", all=TRUE)
 colnames(train_df)[564] <- "activity" #rename new activty column
 
@@ -75,3 +88,4 @@ grouped_set <- group_by(data_set, activity, SubjectId)
 final_set <- summarise_each(grouped_set, "mean")
 View(final_set)
 write.table(final_set, file="./getting_cleaning/course_project/final_set.txt", row.names=FALSE)
+
