@@ -8,3 +8,7 @@ df <- data.frame(x=x, y=y)
 distance <- dist(df)
 clust <- hclust(distance)
 plot(clust)
+
+#making pretty dendrograms
+library(cluster)
+myplclust(clust, lab= rep(1:3, each=4), lab.col=rep(1:3, each=4))
