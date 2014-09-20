@@ -25,8 +25,8 @@ RStudio version 0.98.994, R version 3.1.1 (2014-07-10) -- "Sock it to Me".
 In order to explore the process download the dataset by using this link:
 https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip 
 
-To obtain the output provided for submission the raw data was originally downloaded on September 15, 2014? 1:57:38 PM
-from the link provided above. The link to the website where the data originate is available in the code book.
+To obtain the output provided for submission the raw data was originally downloaded on September 15, 2014 1:57:38 PM 
+from the link provided above. 
 
 
 After you have dowloaded and unizpped the contents:
