@@ -1,6 +1,6 @@
 library(data.table)
-# 1 Merge Training data
-# set features as the variable names for x_train
+# 1 Merge Test data
+# set features as the variable names for x_test
 features <- read.table(file="features.txt", header=FALSE)
 x_test <- read.table(file="test/X_test.txt", header=FALSE)
 names(x_test) <- features[,2]
@@ -8,7 +8,7 @@ names(x_test) <- features[,2]
 y_test <- read.table(file="test/y_test.txt", header=FALSE) 
 names(y_test) <- "labels" # to be replaced with activity labels
 
-#column bind the "Training Labels" to the "Training Set" 
+#column bind the "test Labels" to the "Test Set" 
 test_df <- cbind(y_test, x_test)
 #column bind the subject id 
 subject_id <- read.table(file="test/subject_test.txt", header=FALSE)
