@@ -4,7 +4,7 @@ library(caret)
 library(lubridate)
 library(randomForest)
 
-setwd("C:/Users/aidan/data_science/datasciencecoursera/kaggle/Bicycle")
+setwd("C:/Users/aidan/data_science/datasciencecoursera/kaggle/bicycle")
 
 training <- read.csv("train.csv")
 testing <- read.csv("test.csv")
