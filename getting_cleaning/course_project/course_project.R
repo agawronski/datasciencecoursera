@@ -89,3 +89,16 @@ final_set <- summarise_each(grouped_set, "mean")
 View(final_set)
 write.table(final_set, file="./getting_cleaning/course_project/final_set.txt", row.names=FALSE)
 
+# trying out the clustering example from exploratory data analysis
+par(mfrow=c(1,2), mar=c(5,4,1,1))
+train_df <- transform(train_df, activity=factor(activity))
+#subset out subject 1 activity
+sub1 <- subset(train_df, SubjectId==1)
+plot(sub1[,2], col=sub1$activity, ylab=names(sub1)[2])
+plot(sub1[,3], col=sub1$activity, ylab=names(sub1)[3])
+legend("bottomright", legend=unique(sub1$activity), col=unique(sub1$activity), pch=1)
+distanceMatrix <- dist(sub1)
+hc <- hclust(distanceMatrix)
+library(cluster)
+hclust(hc)
+
