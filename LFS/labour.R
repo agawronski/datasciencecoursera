@@ -248,6 +248,9 @@ data$labourer_manufacturing <- ifelse(employed$NOCS_01_47==47, 1, 0)
 
 #basic model
 basic <- lm(lwage ~ somehigh+high+somepost+diploma+bachelors+graduate+union+tenure++male+multi+public+experience+experience2, data=data)
+summary(basic)
+library(np)
+
 
 # basic plus industry plus industry dummies (accom_food as comparison)
 ind <- lm(lwage ~ somehigh+high+somepost+diploma+bachelors+graduate+union+tenure++male+multi+public+experience+experience2+
@@ -283,10 +286,3 @@ ind_prov_occ <- lm(lwage ~ somehigh+high+somepost+diploma+bachelors+graduate+uni
 coefficients <- ind_prov_occ$coef
 
 write.csv(coefficients, "betas.csv")
-
-h <- read.csv("betas.csv")
-h <- h[,3]
-head(h)
-
-multiply <- coefficients*h
-h_lwage <- sum(multiply)
