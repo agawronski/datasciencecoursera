@@ -4,7 +4,7 @@ setwd("C:/Users/aidan/data_science/datasciencecoursera/practical_machine_learnin
 
 data <- read.csv("pml-training.csv", stringsAsFactors=FALSE)
 
-test <- read.csv("pml-testing.csv", stringsAsFactors=FALSE)
+testing <- read.csv("pml-testing.csv", stringsAsFactors=FALSE)
 
 head(data$classe)
 
@@ -36,14 +36,26 @@ data <- data[,-which(names(data)%in%c("X", "user_name", "raw_timestamp_part_1", 
 
 data$classe <- as.factor(data$classe)
 
-#fitting initial model with random forests
 
-control <- trainControl(ntree=100, mtry=7)
+#______________________________________________________________________________________
+
+#Make split the training set
+
+new <- createDataPartition(data$classe, p=0.7, list=FALSE)
+
+train <- data[new,]
+firstTest <- data[-new,]
 
 
-fit <- train(classe ~ ., method="LogitBoost", data=data)
+#fitting initial model with gbm
 
 
+fit <- train(classe ~ ., method="gbm", data=train)
 
+predict <- predict(fit, test)
+
+table <- table(predict, test$classe)
+
+confusionMatrix(predict, test$classe)
 
 
