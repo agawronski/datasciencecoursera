@@ -75,6 +75,7 @@ confusionMatrix(table)
 # make final predictions
 
 predict <- predict(fit, testing)
+predict
 
 
 
