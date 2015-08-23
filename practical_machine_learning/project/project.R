@@ -44,18 +44,37 @@ data$classe <- as.factor(data$classe)
 new <- createDataPartition(data$classe, p=0.7, list=FALSE)
 
 train <- data[new,]
+
 firstTest <- data[-new,]
 
+#in order to submit this on time, I am only going to use a fraction of the data
 
-#fitting initial model with gbm
+fraction <- createDataPartition(train$classe, p=0.01, list=FALSE)
+train <- train[fraction,]
 
 
-fit <- train(classe ~ ., method="gbm", data=train)
 
-predict <- predict(fit, test)
 
-table <- table(predict, test$classe)
 
-confusionMatrix(predict, test$classe)
+#fitting initial model with gbm and repeated cross validation
+
+fit <- train(classe ~ ., method="rf", data=train)
+
+# check the performance of the model on the "firstTest" set
+
+initial <- predict(fit, firstTest)
+
+table <- table(initial, firstTest$classe)
+
+confusionMatrix(table)
+
+#### Estimate of out of sample error: 67%
+
+
+
+# make final predictions
+
+predict <- predict(fit, testing)
+
 
 
